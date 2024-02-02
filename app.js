@@ -60,7 +60,7 @@ const upload = multer({
 
 app.post('/send-email', upload.fields([{ name: 'cv', maxCount: 1 }, { name: 'certificate', maxCount: 1 }]), async (req, res) => {
   try {
-    const { fullname, email, link, phone } = req.body;
+    const { job, fullname, email, link, phone } = req.body;
 
     const cvBuffer = req.files['cv'][0].buffer;
     const certificateBuffer = req.files['certificate'][0].buffer;
@@ -76,7 +76,7 @@ app.post('/send-email', upload.fields([{ name: 'cv', maxCount: 1 }, { name: 'cer
     const mailOptions = {
       from: process.env.EMAIL,
       to: 'jobsyncnet@gmail.com', 
-      subject: `Application from ${fullname}`,
+      subject: `Applying for  ${job}`,
       text: `Full Name: ${fullname}\nEmail: ${email}\nLink: ${link}\nPhone: ${phone}`,
       attachments: [
         { filename: 'cv.pdf', content: cvBuffer, encoding: 'base64' },

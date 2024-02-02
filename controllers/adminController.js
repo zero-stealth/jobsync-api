@@ -132,16 +132,25 @@ const updateJob = async (req, res) => {
 
 const getJob = async (req, res) => {
   try {
-    const job = await Admin.findById(req.params.id);
+    const jobId = req.params.id;
+
+    if (!jobId) {
+      return res.status(400).json({ message: "Job ID is missing in the request parameters" });
+    }
+
+    const job = await Admin.findById(jobId);
+
     if (!job) {
       return res.status(404).json({ message: "This job does not exist" });
     } else {
       res.status(200).json(job);
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 
 const getJobCategory = async (req, res) => {
   const jobs = await Admin.find({

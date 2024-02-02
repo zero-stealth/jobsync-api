@@ -39,17 +39,23 @@ app.use("/auth", authRoute);
 app.use("/data", adminRoute);
 
 const storage = multer.memoryStorage();
+const fileFilter = (req, file, cb) => {
+  const allowedFileTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+
+  if (allowedFileTypes.includes(file.mimetype)) {
+    cb(null, true); 
+  } else {
+    cb(new Error('Invalid file type. Please upload a valid PDF or image file.'), false); // Reject the file
+  }
+};
+
 const upload = multer({
   storage: storage,
-  fileFilter: (req, file, callback) => {
-    const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif']; 
-    if (allowedImageTypes.includes(file.mimetype)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Invalid file type. Please upload a valid image file.'));
-    }
-  }
+  fileFilter: fileFilter
 });
+
+
+
 
 app.post('/send-email', upload.fields([{ name: 'cv', maxCount: 1 }, { name: 'certificate', maxCount: 1 }]), async (req, res) => {
   try {

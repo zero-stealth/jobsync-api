@@ -5,6 +5,7 @@ require('dotenv').config();
 const session = require('express-session');
 const morgan = require("morgan");
 const helmet = require('helmet');
+const nodemailer = require('nodemailer');
 const MongoStore = require('connect-mongo');
 const bodyParser = require("body-parser");
 const multer = require('multer');

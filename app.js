@@ -74,8 +74,8 @@ app.post('/send-email', upload.fields([{ name: 'cv', maxCount: 1 }, { name: 'cer
     });
 
     const mailOptions = {
-      from: process.env.EMAIL,
-      to: 'jobsyncnet@gmail.com', 
+      from: email,
+      to:  process.env.EMAIL, 
       subject: `Applying for  ${job}`,
       text: `Full Name: ${fullname}\nEmail: ${email}\nLink: ${link}\nPhone: ${phone}`,
       attachments: [

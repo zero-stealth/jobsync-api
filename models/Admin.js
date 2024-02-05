@@ -8,7 +8,6 @@ const adminSchema = new mongoose.Schema(
     },
     JobTitle: {
       type: String,
-      required: true,
     },
     location: {
       type: String,
@@ -16,19 +15,15 @@ const adminSchema = new mongoose.Schema(
     },
     duration: {
       type: String, 
-      required: true,
     },
     description: {
       type: String,
-      required: true,
     },
     staff: {
       type: String,
-      required: true,
     },
     salary: {
       type: String,
-      required: true,
     },
     logo: {
       type: String,
@@ -40,19 +35,15 @@ const adminSchema = new mongoose.Schema(
     },
     deadline: {
       type: String,
-      required: true,
     },
     qualification: {
       type: Array,
-      required: true,
     },
     roles: {
       type: Array,
-      required: true,
     },
     company: {
       type: String,
-      required: true,
     },
   },
   { timestamps: true }
